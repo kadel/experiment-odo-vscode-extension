@@ -1,0 +1,104 @@
+{
+  "name": "odo",
+  "displayName": "odo",
+  "description": "odo extension",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.76.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "odo.runCommand",
+        "title": "run command",
+        "icon": {
+          "light": "media/play-light.svg",
+          "dark": "media/play-dark.svg"
+        }
+      },
+      {
+        "command": "odo.dev",
+        "title": "run odo dev",
+        "shortTitle": "dev"
+      },
+      {
+        "command": "odo.deploy",
+        "title": "deploy",
+        "shortTitle": "deploy"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "odo-explorer",
+          "title": "odo",
+          "icon": "media/logo.png"
+        }
+      ]
+    },
+    "views": {
+      "odo-explorer": [
+        {
+          "id": "components-explorer",
+          "name": "Components",
+          "icon": "media/logo.png",
+          "contextualTitle": "Odo components"
+        },
+        {
+          "id": "devfile-explorer",
+          "name": "Devfile Explorer",
+          "icon": "media/logo.png",
+          "contextualTitle": "Devfile Explorer"
+        }
+      ]
+    },
+    "menus": {
+      "view/item/context": [
+        {
+          "command": "odo.runCommand",
+          "when": "view == devfile-explorer && viewItem == command",
+          "group": "inline"
+        },
+        {
+          "command": "odo.dev",
+          "when": "view == devfile-explorer && viewItem == devfile",
+          "group": "inline"
+        },
+        {
+          "command": "odo.deploy",
+          "when": "view == devfile-explorer && viewItem == devfile",
+          "group": "inline"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@devfile/api": "^2.2.1-alpha-1667236163",
+    "@types/glob": "^8.1.0",
+    "@types/js-yaml": "^4.0.5",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.76.0",
+    "@typescript-eslint/eslint-plugin": "^5.53.0",
+    "@typescript-eslint/parser": "^5.53.0",
+    "@vscode/test-electron": "^2.2.3",
+    "eslint": "^8.34.0",
+    "glob": "^8.1.0",
+    "js-yaml": "^4.1.0",
+    "mocha": "^10.2.0",
+    "typescript": "^4.9.5"
+  }
+}
